@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="87cbee3c-c528-4d55-be60-ecc2de59a2b9" name="Changes" comment="" />
+    <list default="true" id="87cbee3c-c528-4d55-be60-ecc2de59a2b9" name="Changes" comment="Initial commit: DB structure.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,6 +48,8 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
+    <MESSAGE value="Initial commit: DB structure." />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit: DB structure." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
