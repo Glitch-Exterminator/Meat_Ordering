@@ -153,3 +153,35 @@ SET price_per_kg = price_per_kg * 1.50;
 SELECT * FROM products;
 
 ROLLBACK;
+
+-- Task 5.1
+
+WITH total_per_product AS (
+    SELECT orders_products.product_id, product_name, SUM(orders_products.amount) * products.price_per_kg AS product_total
+    FROM orders_products JOIN products USING (product_id)
+    GROUP BY orders_products.product_id, product_name
+)
+
+SELECT product_name AS 'Название продукта',
+    product_total AS 'Сумма продаж',
+    ROUND((product_total / SUM(product_total) OVER ()) * 100, 2) AS 'Накопительный процент'
+FROM total_per_product
+ORDER BY 2 DESC;
+
+-- Task 5.2
+
+WITH order_weights AS (
+    SELECT client_id, order_id, SUM(amount) AS order_weight
+    FROM orders JOIN orders_products USING (order_id)
+    GROUP BY client_id, order_id
+), numbered AS (
+    SELECT client_id, ROW_NUMBER() OVER (PARTITION BY client_id ORDER BY order_id) AS Номер, order_id, order_weight
+    FROM order_weights
+), client_average AS (
+    SELECT client_id, AVG(order_weight) AS average_order_weight FROM numbered
+    GROUP BY client_id
+)
+
+SELECT client_id AS Клиент, Номер, order_id, order_weight AS 'Вес'
+FROM numbered JOIN client_average USING (client_id)
+WHERE order_weight > average_order_weight * 1.2;
